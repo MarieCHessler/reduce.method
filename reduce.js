@@ -67,6 +67,20 @@ const teamMembers = [
 ];
 
 // Totaling a specific object property
+let totalExperience = teamMembers.reduce((acc, curr) => acc + curr.yrsExperience, 0) // Dive into element using dot notation to get yrsExperience. Super important to specify initial value, i.e. 0
+console.log(totalExperience)
 
 
 // Grouping by a property, and totaling it too
+// {Developer: 12, Designer:4} <-- This is what we want as result
+let experienceByProfession = teamMembers.reduce((acc, curr) => { // Longer arrow function since it will be a few lines, and a return statement is needed
+  let key = curr.profession;
+  if (!acc[key]) { // Key does not exist?
+    acc[key] = curr.yrsExperience; // If it does not, set key to yrsExperience
+  } else { // If key already exists
+    acc[key] += curr.yrsExperience;
+  }
+  return acc;
+}, {}); // First set of curly braces is the boundaries of the callback function, the second set is the initial value
+
+console.log(experienceByProfession)
